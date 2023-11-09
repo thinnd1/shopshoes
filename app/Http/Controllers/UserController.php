@@ -2,15 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Shop;
 use Illuminate\Http\Request;
+use App\Models\User;
 
-class ShopController extends Controller
+class UserController extends Controller
 {
-    protected $shopModel;
-    public function __construct(Shop $shop)
+
+    protected $user;
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct(User $user)
     {
-        $this->shopModel = $shop;
+        $this->user = $user;
     }
     /**
      * Display a listing of the resource.
@@ -19,7 +25,8 @@ class ShopController extends Controller
      */
     public function index()
     {
-        //
+        $getUser = $this->user->getAllUser();
+        return $this->sendResponse($getUser, 'Product list');
     }
 
     /**
@@ -46,21 +53,22 @@ class ShopController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Shop  $shop
+     * @param  \App\Models\Brands  $brands
      * @return \Illuminate\Http\Response
      */
-    public function show(Shop $shop)
+    public function show($id)
     {
-        //
+        $getUser = $this->user->getUserById($id);
+        return $this->sendResponse($getUser, 'Product list');
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Shop  $shop
+     * @param  \App\Models\Brands  $brands
      * @return \Illuminate\Http\Response
      */
-    public function edit(Shop $shop)
+    public function edit(Request $request)
     {
         //
     }
@@ -69,10 +77,10 @@ class ShopController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Shop  $shop
+     * @param  \App\Models\Brands  $brands
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Shop $shop)
+    public function update(Request $request)
     {
         //
     }
@@ -80,10 +88,10 @@ class ShopController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Shop  $shop
+     * @param  \App\Models\Brands  $brands
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Shop $shop)
+    public function destroy(Request $request)
     {
         //
     }

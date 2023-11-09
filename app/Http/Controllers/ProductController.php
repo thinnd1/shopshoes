@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
+    public function __construct()
+    {
+    }
     /**
      * Display a listing of the resource.
      *

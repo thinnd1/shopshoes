@@ -98,4 +98,16 @@ class User extends Authenticatable
     {
         return $this->isMasterAdmin() || $this->roles->contains(Role::ADMINISTRATOR_ID);
     }
+
+    public function getAllUser()
+    {
+        $getUser = User::all();
+        return $getUser;
+    }
+
+    public function getUserById($id)
+    {
+        $getUser = User::where('id', $id)->first();
+        return $getUser;
+    }
 }

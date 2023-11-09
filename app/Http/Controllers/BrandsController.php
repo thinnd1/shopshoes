@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 
 class BrandsController extends Controller
 {
+    protected $brand;
+    public function __construct(Brands $brands)
+    {
+        $this->brand = $brands;
+    }
     /**
      * Display a listing of the resource.
      *

@@ -42,5 +42,8 @@ class Product extends Model
         'price_with_taxes',
     ];
 
+    public function getAllProduct()
+    {
+    }
 
 }
