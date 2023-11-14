@@ -9,8 +9,40 @@ class Category extends Model
 {
     use HasFactory;
 
-    public function products()
+    public function getCategory()
     {
-        return $this->belongsToMany(Product::class, config('hameos.ecommerce.general.table.product_with_categories_table'), 'category_id', 'product_id');
+        return Category::all();
+    }
+    public function getCategoryId($id)
+    {
+        return Category::where('id', $id)->first();
+    }
+
+    public function insert($data)
+    {
+        return Category::create($data);
+    }
+
+    public function update()
+    {
+        $category = Category::find($id);
+
+        $category->name = $data['name'];
+        $category->email = $data['email'];
+        $category->phone = $data['phone'];
+        $category->address = $data['address'];
+        $category->country = $data['country'];
+        $category->state = $data['state'];
+        $category->city = $data['city'];
+        $category->is_primary = $data['is_primary'];
+        $category->is_shipping_location = $data['is_shipping_location'];
+
+        return $category->save();
+    }        
+    }
+    
+    public function delete($id)
+    {
+        return Category::where('id', $id)->delete();
     }
 }

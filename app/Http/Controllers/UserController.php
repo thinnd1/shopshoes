@@ -26,17 +26,7 @@ class UserController extends Controller
     public function index()
     {
         $getUser = $this->user->getAllUser();
-        return $this->sendResponse($getUser, 'Product list');
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return $this->responseSuccess($getUser);
     }
 
     /**
@@ -59,18 +49,7 @@ class UserController extends Controller
     public function show($id)
     {
         $getUser = $this->user->getUserById($id);
-        return $this->sendResponse($getUser, 'Product list');
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Brands  $brands
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Request $request)
-    {
-        //
+        return $this->responseSuccess($getUser);
     }
 
     /**

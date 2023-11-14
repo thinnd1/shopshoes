@@ -35,4 +35,38 @@ class Shipments extends Model
     {
         return $this->belongsTo(Order::class, 'order_id');
     }
+    public function getAllShipment()
+    {
+        return Shipments::all();
+    }
+    
+    public function getAllShipmentId()
+    {
+        return Shipments::where('id', $id)->first();
+    }
+    
+    public function update($id, $data)
+    {
+        $product = Product::find($id);
+        
+        $product->name = $data['name'];
+        $product->website = $data['website'];
+        $product->description = $data['description'];
+        $product->status = $data['status'];
+        $product->country = $data['country'];
+        $product->image = $data['image'];
+
+        return $product->save();
+    }
+
+    public function insert($data)
+    {
+        return Shipments::create($data);
+    }
+
+    public function delete($id)
+    {
+        return Shipments::where('id', $id)->delete();
+    }
+
 }

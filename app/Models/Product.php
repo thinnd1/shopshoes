@@ -44,6 +44,36 @@ class Product extends Model
 
     public function getAllProduct()
     {
+        return Product::all();
+    }
+
+    public function getProductId($id)
+    {
+        return Product::where('id', $id)->first();
+    }
+
+    public function insert($data)
+    {
+        return Product::create($data);
+    }
+
+    public function update($id, $data)
+    {
+        $product = Product::find($id);
+        
+        $product->name = $data['name'];
+        $product->website = $data['website'];
+        $product->description = $data['description'];
+        $product->status = $data['status'];
+        $product->country = $data['country'];
+        $product->image = $data['image'];
+
+        return $product->save();
+    }
+
+    public function delete($id)
+    {
+        return Product::where('id', $id)->delete();
     }
 
 }

@@ -19,17 +19,8 @@ class BrandsController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        $getBrand = $this->brand->getAllBrand();
+        return $this->responseSuccess($getBrand);
     }
 
     /**
@@ -40,7 +31,17 @@ class BrandsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = [
+            'name' => $request['name'],
+            'website' => $request['website'],
+            'description' => $request['description'],
+            'status' => $request['status'],
+            'country' => $request['country'],
+            'image' => $request['image'],
+        ];
+
+        $this->brand->insertBrand($data);
+        return $this->responseSuccess(1);
     }
 
     /**
@@ -49,20 +50,10 @@ class BrandsController extends Controller
      * @param  \App\Models\Brands  $brands
      * @return \Illuminate\Http\Response
      */
-    public function show(Brands $brands)
+    public function show($id)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Brands  $brands
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Brands $brands)
-    {
-        //
+        $getBrand = $this->brand->getBrandId($id);
+        return $this->responseSuccess($getBrand);
     }
 
     /**
@@ -74,7 +65,8 @@ class BrandsController extends Controller
      */
     public function update(Request $request, Brands $brands)
     {
-        //
+        $this->brand->updateBrand($request['id'], $request);
+        return $this->responseSuccess(1);
     }
 
     /**
@@ -85,6 +77,7 @@ class BrandsController extends Controller
      */
     public function destroy(Brands $brands)
     {
-        //
+        $this->brand->deleteShop($id);
+        return $this->responseSuccess(1);
     }
 }

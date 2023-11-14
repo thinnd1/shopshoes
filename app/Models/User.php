@@ -110,4 +110,10 @@ class User extends Authenticatable
         $getUser = User::where('id', $id)->first();
         return $getUser;
     }
+
+    public function insert($data)
+    {
+        return User::create($data);
+    }
+
 }

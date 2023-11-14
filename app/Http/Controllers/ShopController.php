@@ -7,10 +7,10 @@ use Illuminate\Http\Request;
 
 class ShopController extends Controller
 {
-    protected $shopModel;
+    protected $shop;
     public function __construct(Shop $shop)
     {
-        $this->shopModel = $shop;
+        $this->shop = $shop;
     }
     /**
      * Display a listing of the resource.
@@ -19,17 +19,8 @@ class ShopController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        $getShop = $this->shop->getAllShop();
+        return $this->responseSuccess($getShop);
     }
 
     /**
@@ -40,7 +31,20 @@ class ShopController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = [
+            'name' => $request['name'],
+            'phone' => $request['phone'],
+            'email' => $request['email'],
+            'address' => $request['address'],
+            'country' => $request['country'],
+            'state' => $request['state'],
+            'city' => $request['city'],
+            'is_primary' => $request['is_primary'],
+            'is_shipping_location' => $request['is_shipping_location'],
+        ];
+
+        $this->shop->insertShop($data);
+        return $this->responseSuccess(1);
     }
 
     /**
@@ -49,20 +53,10 @@ class ShopController extends Controller
      * @param  \App\Models\Shop  $shop
      * @return \Illuminate\Http\Response
      */
-    public function show(Shop $shop)
+    public function show($id)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Shop  $shop
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Shop $shop)
-    {
-        //
+        $getShop = $this->shop->getShopId($id);
+        return $this->responseSuccess($getShop);
     }
 
     /**
@@ -72,9 +66,10 @@ class ShopController extends Controller
      * @param  \App\Models\Shop  $shop
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Shop $shop)
+    public function update(Request $request)
     {
-        //
+        $this->shop->updateShop($request['id'], $request);
+        return $this->responseSuccess(1);
     }
 
     /**
@@ -83,8 +78,9 @@ class ShopController extends Controller
      * @param  \App\Models\Shop  $shop
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Shop $shop)
+    public function destroy($id)
     {
-        //
+        $this->shop->deleteShop($id);
+        return $this->responseSuccess(1);
     }
 }
