@@ -7,9 +7,10 @@ use Illuminate\Http\Request;
 
 class ShipmentsController extends Controller
 {
-    public function __construct()
+    protected $shipments;
+    public function __construct(Shipments $shipments)
     {
-        parent::__construct();
+        $this->shipments = $shipments;
     }
     /**
      * Display a listing of the resource.
@@ -18,7 +19,8 @@ class ShipmentsController extends Controller
      */
     public function index()
     {
-        //
+        $getAllShipment = $this->shipments->getAllShipment();
+        return $this->responseSuccess($getAllShipment);
     }
 
     /**
@@ -27,7 +29,7 @@ class ShipmentsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store()
     {
         //
     }
@@ -38,9 +40,10 @@ class ShipmentsController extends Controller
      * @param  \App\Models\Shipments  $shipments
      * @return \Illuminate\Http\Response
      */
-    public function show(Shipments $shipments)
+    public function show($id)
     {
-        //
+        $getAllShipment = $this->shipments->getAllShipmentId($id);
+        return $this->responseSuccess($getAllShipment);
     }
 
     /**
@@ -50,7 +53,7 @@ class ShipmentsController extends Controller
      * @param  \App\Models\Shipments  $shipments
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Shipments $shipments)
+    public function update(Request $request)
     {
         //
     }
@@ -61,8 +64,9 @@ class ShipmentsController extends Controller
      * @param  \App\Models\Shipments  $shipments
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Shipments $shipments)
+    public function destroy($id)
     {
-        //
+        $this->shipments->delete($id);
+        return $this->responseSuccess(1);
     }
 }

@@ -7,8 +7,10 @@ use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
+    protected $category;
     public function __construct(Category $category)
     {
+        $this->category = $category;
     }
     /**
      * Display a listing of the resource.
@@ -17,7 +19,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        $category = $this->category->getCategory();
+        return $this->responseSuccess($category);
     }
 
     /**
@@ -28,18 +31,27 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        $data = [
+            'name' => $request['name'],
+            'description' => $request['description'],
+            'status' => $request['status'],
+            'icon' => $request['icon'],
+            'is_default' => $request['is_default'],
+        ];
 
+        $this->category->insert($data);
+        return $this->responseSuccess(1);
+    }
     /**
      * Display the specified resource.
      *
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function show(Category $category)
+    public function show($id)
     {
-        //
+        $category = $this->category->getCategoryId($id);
+        return $this->responseSuccess($category);
     }
 
     /**
@@ -49,9 +61,10 @@ class CategoryController extends Controller
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Category $category)
+    public function update(Request $request)
     {
-        //
+        $this->category->updateCategory($request['id'], $request);
+        return $this->responseSuccess(1);
     }
 
     /**
@@ -60,8 +73,9 @@ class CategoryController extends Controller
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Category $category)
+    public function destroy($id)
     {
-        //
+        $this->category->deleteCategory($id);
+        return $this->responseSuccess(1);
     }
 }

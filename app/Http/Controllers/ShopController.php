@@ -80,7 +80,7 @@ class ShopController extends Controller
      */
     public function destroy($id)
     {
-        $this->shop->deleteShop($id);
+        $this->shop->deleteBrand($id);
         return $this->responseSuccess(1);
     }
 }

@@ -9,6 +9,15 @@ class Category extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'name',
+        'description',
+        'status',
+        'image',
+        'icon',
+        'is_default'
+    ];
+
     public function getCategory()
     {
         return Category::all();
@@ -23,25 +32,20 @@ class Category extends Model
         return Category::create($data);
     }
 
-    public function update()
+    public function updateCategory($id, $data)
     {
         $category = Category::find($id);
 
         $category->name = $data['name'];
-        $category->email = $data['email'];
-        $category->phone = $data['phone'];
-        $category->address = $data['address'];
-        $category->country = $data['country'];
-        $category->state = $data['state'];
-        $category->city = $data['city'];
-        $category->is_primary = $data['is_primary'];
-        $category->is_shipping_location = $data['is_shipping_location'];
+        $category->description = $data['description'];
+        $category->status = $data['status'];
+        $category->icon = $data['icon'];
+        $category->is_default = $data['is_default'];
 
         return $category->save();
     }        
-    }
-    
-    public function delete($id)
+
+    public function deleteCategory($id)
     {
         return Category::where('id', $id)->delete();
     }

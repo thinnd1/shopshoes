@@ -9,6 +9,14 @@ class Brands extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'name',
+        'website',
+        'description',
+        'status',
+        'image',
+    ];
+
     public function getAllBrand()
     {
         return Brands::all();
@@ -32,12 +40,11 @@ class Brands extends Model
         $brand->website = $data['website'];
         $brand->description = $data['description'];
         $brand->status = $data['status'];
-        $brand->country = $data['country'];
         $brand->image = $data['image'];
 
         return $brand->save();
     }
-    public function delete($id)
+    public function deleteBrand($id)
     {
         return Brands::where('id', $id)->delete();
     }

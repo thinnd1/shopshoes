@@ -7,9 +7,10 @@ use Illuminate\Http\Request;
 
 class OrderDetailController extends Controller
 {
-        public function __construct()
+    protected $orderDetail;
+    public function __construct(OrderDetail $orderDetail)
     {
-        parent::__construct();
+        $this->orderDetail = $orderDetail;
     }
     /**
      * Display a listing of the resource.
@@ -18,7 +19,8 @@ class OrderDetailController extends Controller
      */
     public function index()
     {
-        //
+        $getAllOrderDetail = $this->orderDetail->getAllOrderDetail();
+        return $this->responseSuccess($getAllOrderDetail);
     }
 
     /**
@@ -30,6 +32,17 @@ class OrderDetailController extends Controller
     public function store(Request $request)
     {
         //
+        $data = [
+            'name' => $request['name'],
+            'shipping_option' => $request['website'],
+            'shipping_method' => $request['description'],
+            'status' => $request['status'],
+            'amount' => $request['country'],
+            'shipping_amount' => $request['image'],
+        ];
+
+        $this->orderDetail->insert($data);
+        return $this->responseSuccess(1);
     }
 
     /**
@@ -38,9 +51,10 @@ class OrderDetailController extends Controller
      * @param  \App\Models\OrderDetail  $orderDetail
      * @return \Illuminate\Http\Response
      */
-    public function show(OrderDetail $orderDetail)
+    public function show($id)
     {
-        //
+        $getAllOrderDetail = $this->orderDetail->getOrderDetailId($id);
+        return $this->responseSuccess($getAllOrderDetail);
     }
 
     /**
@@ -50,9 +64,11 @@ class OrderDetailController extends Controller
      * @param  \App\Models\OrderDetail  $orderDetail
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, OrderDetail $orderDetail)
+    public function update(Request $request)
     {
         //
+        $this->orderDetail->update($request['id'], $request);
+        return $this->responseSuccess(1);
     }
 
     /**
@@ -61,8 +77,9 @@ class OrderDetailController extends Controller
      * @param  \App\Models\OrderDetail  $orderDetail
      * @return \Illuminate\Http\Response
      */
-    public function destroy(OrderDetail $orderDetail)
+    public function destroy($id)
     {
-        //
+        $this->orderDetail->delete($id);
+        return $this->responseSuccess(1);
     }
 }

@@ -35,13 +35,6 @@ class Product extends Model
         'stock_status'
     ];
 
-    protected $appends = [
-        'image',
-        'sell_price',
-        'sell_price_with_taxes',
-        'price_with_taxes',
-    ];
-
     public function getAllProduct()
     {
         return Product::all();
@@ -57,21 +50,28 @@ class Product extends Model
         return Product::create($data);
     }
 
-    public function update($id, $data)
+    public function updateProduct($id, $data)
     {
         $product = Product::find($id);
-        
+
         $product->name = $data['name'];
-        $product->website = $data['website'];
+        $product->content = $data['content'];
         $product->description = $data['description'];
         $product->status = $data['status'];
-        $product->country = $data['country'];
-        $product->image = $data['image'];
+        $product->brand_id = $data['brand_id'];
+        $product->sku = $data['sku'];
+        $product->images = $data['images'];
+        $product->price = $data['price'];
+        $product->sale_price = $data['sale_price'];
+        $product->sale_type = $data['sale_type'];
+        $product->sale_at = $data['sale_at'];
+        $product->end_sale_at = $data['end_sale_at'];
+        $product->views = $data['views'];
 
         return $product->save();
     }
 
-    public function delete($id)
+    public function deleteProduct($id)
     {
         return Product::where('id', $id)->delete();
     }

@@ -70,8 +70,9 @@ class UserController extends Controller
      * @param  \App\Models\Brands  $brands
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request)
+    public function destroy($id)
     {
-        //
+        $this->user->delete($id);
+        return $this->responseSuccess(1);
     }
 }

@@ -36,7 +36,6 @@ class BrandsController extends Controller
             'website' => $request['website'],
             'description' => $request['description'],
             'status' => $request['status'],
-            'country' => $request['country'],
             'image' => $request['image'],
         ];
 
@@ -63,7 +62,7 @@ class BrandsController extends Controller
      * @param  \App\Models\Brands  $brands
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Brands $brands)
+    public function update(Request $request)
     {
         $this->brand->updateBrand($request['id'], $request);
         return $this->responseSuccess(1);
@@ -75,9 +74,9 @@ class BrandsController extends Controller
      * @param  \App\Models\Brands  $brands
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Brands $brands)
+    public function destroy($id)
     {
-        $this->brand->deleteShop($id);
+        $this->brand->deleteBrand($id);
         return $this->responseSuccess(1);
     }
 }

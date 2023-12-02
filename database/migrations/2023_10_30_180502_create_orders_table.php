@@ -26,7 +26,7 @@ class CreateOrdersTable extends Migration
             $table->text('description')->nullable();
             $table->string('coupon_code', 120)->nullable();
             $table->decimal('discount_amount', 15)->nullable();
-            $table->decimal('sub_total', 15);
+            $table->decimal('sub_total', 15)->nullable();
             $table->boolean('is_confirmed')->default(false);
             $table->string('discount_description', 255)->nullable();
             $table->boolean('is_finished')->default(1)->nullable();

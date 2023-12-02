@@ -16,12 +16,9 @@ class CreateCategoriesTable extends Migration
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
             $table->string('name', 120);
-            $table->bigInteger('parent_id')->unsigned()->default(0);
             $table->mediumText('description')->nullable();
             $table->string('status', 60)->default('published');
             $table->string('icon', 60)->nullable();
-            $table->tinyInteger('order')->default(0);
-            $table->tinyInteger('is_featured')->default(0);
             $table->tinyInteger('is_default')->unsigned()->default(0);
             $table->timestamps();
         });

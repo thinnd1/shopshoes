@@ -7,9 +7,10 @@ use Illuminate\Http\Request;
 
 class ReviewsController extends Controller
 {
-    public function __construct()
+    protected $reviews;
+    public function __construct(Reviews $reviews)
     {
-        parent::__construct();
+       $this->reviews = $reviews;
     }
     /**
      * Display a listing of the resource.
@@ -62,8 +63,9 @@ class ReviewsController extends Controller
      * @param  \App\Models\Reviews  $reviews
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Reviews $reviews)
+    public function destroy($id)
     {
-        //
+        $this->reviews->delete($id);
+        return $this->responseSuccess(1);
     }
 }

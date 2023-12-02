@@ -42,11 +42,11 @@ Route::put('shops', [ShopController::class, 'update'])->name('shop.update');
 Route::delete('shops/{id}', [ShopController::class, 'destroy'])->name('shop.destroy');
 
 // BrandsController
-Route::get('brand', [BrandsController::class, 'index']);
+Route::get('brands', [BrandsController::class, 'index']);
 Route::get('brand/{id}', [BrandsController::class, 'show'])->name('brand.show');
-Route::post('brand', [BrandsController::class, 'store'])->name('brand.store');
-Route::put('brand', [BrandsController::class, 'update'])->name('brand.update');
-Route::delete('brand/{user}', [BrandsController::class, 'destroy'])->name('brand.destroy');
+Route::post('brands', [BrandsController::class, 'store'])->name('brand.store');
+Route::put('brands', [BrandsController::class, 'update'])->name('brand.update');
+Route::delete('brands/{id}', [BrandsController::class, 'destroy'])->name('brand.destroy');
 
 // CategoryController
 Route::get('category', [CategoryController::class, 'index']);

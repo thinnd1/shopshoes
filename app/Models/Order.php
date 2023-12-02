@@ -30,7 +30,6 @@ class Order extends Model
         'is_confirmed',
         'discount_description',
         'is_finished',
-        'token',
         'payment_id',
     ];
 
@@ -69,7 +68,7 @@ class Order extends Model
         return Order::where('id', $id)->first();
     }
 
-    public function update($id, $request)
+    public function updateOrder($id, $request)
     {
         $order = Order::find($id);
         
@@ -79,7 +78,7 @@ class Order extends Model
         $order->status =  $request['status'];
         $order->amount =  $request['amount'];
         $order->shipping_amount =  $request['shipping_amount'];
-        $order->currency_id =  $request['currency_id'];
+        $order->currency_id = $request['currency_id'];
         $order->description =  $request['description'];
         $order->coupon_code =  $request['coupon_code'];
         $order->discount_amount =  $request['discount_amount'];
@@ -96,7 +95,7 @@ class Order extends Model
         return Order::create($data);
     }
 
-    public function delete($id)
+    public function deleteOrder($id)
     {
         return Order::where('id', $id)->delete();
     }
